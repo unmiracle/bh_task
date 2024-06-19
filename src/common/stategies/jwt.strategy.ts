@@ -12,20 +12,17 @@ const opts = {
   secretOrKey: cfg.JWT.SECRET as string,
 };
 
-const jwtStrategy = new Strategy(
-  opts,
-  async (payload: any, done: DoneCallback) => {
-    try {
-      const user = await userRepository.findOne({
-        where: { id: payload.id },
-      });
-      if (!user) throw new Error('User not found');
+const jwtStrategy = new Strategy(opts, async (payload: any, done: DoneCallback) => {
+  try {
+    const user = await userRepository.findOne({
+      where: { id: payload.userId },
+    });
+    if (!user) throw new Error('User not found');
 
-      return done(null, user);
-    } catch (error) {
-      return done(error);
-    }
+    return done(null, user);
+  } catch (error) {
+    return done(error);
   }
-);
+});
 
 export default jwtStrategy;

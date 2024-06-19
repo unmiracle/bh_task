@@ -14,7 +14,6 @@ router.post('/users/register', registerUser);
 
 router.post('/users/login', loginUser);
 
-// add middleware
 // почему не PATCH а PUT?
 router.put('/users/:id/role', auth, authorizeRole(ROLES.ADMIN), updateUserRole);
 

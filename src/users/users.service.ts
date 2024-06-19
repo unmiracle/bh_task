@@ -13,13 +13,18 @@ const userRepository = AppDataSource.getRepository(User);
 export const registerUser = async (req: Request, res: Response) => {
   const { username, password, email } = req.body;
   try {
+    if (!(username as string).trim() || !(password as string).trim())
+      throw new Error('Username and password is required!');
+
     const user = userRepository.create();
     user.username = username;
     user.password = password;
     user.email = email;
     await userRepository.save(user);
 
-    res.status(201).json(user);
+    const createdUser = await userRepository.findOneBy({ id: user.id });
+
+    res.status(201).json(createdUser);
   } catch (error: any) {
     res.status(400).json({ error: error?.message });
   }
@@ -40,7 +45,7 @@ export const loginUser = async (req: Request, res: Response) => {
 
     if (!user || !(await user.comparePassword(password))) {
       // лучше выдать неизвестную ошибку
-      // чем показывать потенциальному злоумышленнику что он ввел пароль не правильно :)
+      // чем показывать потенциальному злоумышленнику что он ввел пароль неправильно :)
       return res.status(401).json({ error: 'Unknown error' });
     }
 

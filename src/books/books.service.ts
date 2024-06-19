@@ -7,7 +7,9 @@ import { AppDataSource } from '../common/config/db';
 const booksRepository = AppDataSource.getRepository(Book);
 
 export const createBook = async (req: Request, res: Response) => {
+  const body = req.body;
   try {
+    if (!(body.title as string).trim()) throw new Error('At least title is required!');
     const book = await booksRepository.save(req.body);
 
     res.status(201).json({ ...book });
@@ -45,6 +47,9 @@ export const updateBookById = async (req: Request, res: Response) => {
   const { id } = req.params;
   const body = req.body;
   try {
+    if (!body.title || !(body.title as string).trim())
+      throw new Error('At least title is required!');
+
     const book = await booksRepository.findOneBy({ id: +id });
 
     if (!book) {

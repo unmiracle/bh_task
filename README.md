@@ -1,8 +1,4 @@
-
 # BH Test Task
-
-
-
 
 ## Environment Variables
 
@@ -11,6 +7,7 @@ To run this project, you will need to add the following environment variables to
 ```bash
 cp .env.example .env
 ```
+
 ## Run Locally
 
 Clone the project
@@ -19,6 +16,7 @@ Clone the project
 //ssh
 git clone git@github.com:unmiracle/bh_task.git
 ```
+
 ```bash
 //https
 git clone https://github.com/unmiracle/bh_task.git
@@ -41,6 +39,7 @@ Create docker container
 ```bash
 docker compose up -d
 ```
+
 or (in case if you have old docker version installed)
 
 ```bash
@@ -52,4 +51,3 @@ Start the server
 ```bash
 yarn start:nodemon
 ```
-
