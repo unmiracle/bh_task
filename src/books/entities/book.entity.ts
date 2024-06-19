@@ -1,7 +1,8 @@
-import { Column, Entity } from "typeorm";
-import { CoreEntity } from "../../common/abstracts/core-entity.abstract";
+import { Column, Entity } from 'typeorm';
 
-@Entity("books")
+import { CoreEntity } from '../../common/abstracts/core-entity.abstract';
+
+@Entity('books')
 export class Book extends CoreEntity {
   @Column()
   title: string;
@@ -12,6 +13,6 @@ export class Book extends CoreEntity {
   @Column()
   publicationDate: Date;
 
-  @Column({ type: "jsonb" })
+  @Column('simple-array')
   genres: string[];
 }

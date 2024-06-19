@@ -1,24 +1,21 @@
-import { Router } from "express";
-import { getCurrentUser, loginUser, registerUser } from "./users.service";
-import { auth } from "../common/middlewares/auth.middleware";
+import { Router } from 'express';
+
+import { auth } from '../common/middlewares/auth.middleware';
+import { authorizeRole } from '../common/middlewares/role.middleware';
+
+import { ROLES } from './consts/role.const';
+import { getCurrentUser, loginUser, registerUser, updateUserRole } from './users.service';
 
 const router = Router();
 
-// router.get("/users");
+router.get('/users/me', auth, getCurrentUser);
 
-router.get("/users/me", auth, getCurrentUser);
+router.post('/users/register', registerUser);
 
-// router.post("/users");
-
-router.post("/users/register", registerUser);
-
-router.post("/users/login", loginUser);
-
-router.put("/users/:id");
+router.post('/users/login', loginUser);
 
 // add middleware
-router.put("/users/:id/role");
-
-router.delete("/users/:id");
+// почему не PATCH а PUT?
+router.put('/users/:id/role', auth, authorizeRole(ROLES.ADMIN), updateUserRole);
 
 export default router;

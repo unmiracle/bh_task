@@ -1,10 +1,9 @@
-import { BeforeInsert, Column, Entity } from "typeorm";
-import * as bcrypt from "bcryptjs";
+import * as bcrypt from 'bcryptjs';
+import { BeforeInsert, Column, Entity } from 'typeorm';
 
-import { CoreEntity } from "../../common/abstracts/core-entity.abstract";
-import { UserRole, UserRoles } from "../enums/role.enum";
+import { CoreEntity } from '../../common/abstracts/core-entity.abstract';
 
-@Entity("users")
+@Entity('users')
 export class User extends CoreEntity {
   @Column()
   username: string;
@@ -37,5 +36,9 @@ export class User extends CoreEntity {
 
   removeRole(role: number) {
     this.roles &= ~role;
+  }
+
+  setRoles(roles: number) {
+    this.roles = roles;
   }
 }

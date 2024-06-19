@@ -1,4 +1,4 @@
-import * as dotenv from "dotenv";
+import * as dotenv from 'dotenv';
 
 dotenv.config();
 
@@ -14,7 +14,7 @@ export const cfg = {
     DATABASE: process.env.DB_NAME,
   },
   JWT: {
-    EXPIRES_IN: "7d",
+    EXPIRES_IN: '7d',
     SECRET: process.env.JWT_SECRET,
   },
 };

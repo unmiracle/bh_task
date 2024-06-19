@@ -1,8 +1,9 @@
-import { ExtractJwt, Strategy } from "passport-jwt";
-import { DoneCallback } from "passport";
-import { AppDataSource } from "../config/db";
-import { User } from "../../users/entities/user.entity";
-import { cfg } from "../config/cfg";
+import { DoneCallback } from 'passport';
+import { ExtractJwt, Strategy } from 'passport-jwt';
+
+import { User } from '../../users/entities/user.entity';
+import { cfg } from '../config/cfg';
+import { AppDataSource } from '../config/db';
 
 const userRepository = AppDataSource.getRepository(User);
 
@@ -15,8 +16,10 @@ const jwtStrategy = new Strategy(
   opts,
   async (payload: any, done: DoneCallback) => {
     try {
-      const user = await userRepository.findOne({ where: { id: payload.id } });
-      if (!user) throw new Error("User not found");
+      const user = await userRepository.findOne({
+        where: { id: payload.id },
+      });
+      if (!user) throw new Error('User not found');
 
       return done(null, user);
     } catch (error) {
