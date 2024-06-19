@@ -1,5 +1,9 @@
 # BH Test Task
 
+## Postman collection link
+
+[Postman Collection](https://elements.getpostman.com/redirect?entityId=1826146-9a9ab28e-9f3f-41cf-a67c-8265bf1620c7&entityType=collection)
+
 ## Environment Variables
 
 To run this project, you will need to add the following environment variables to your .env file
