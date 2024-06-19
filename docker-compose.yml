@@ -1,0 +1,21 @@
+version: "3.3"
+
+services:
+  postgres:
+    container_name: postgres_bothub
+    image: postgres:alpine
+    expose:
+      - 5432
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: example
+      POSTGRES_DB: main
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    restart: always
+
+volumes:
+  postgres:
+    driver: local
